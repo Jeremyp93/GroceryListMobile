@@ -4,3 +4,5 @@ docker build -t grocery-list-app .
 
 run docker container angular
 docker run -p 8095:80 grocery-list-app
+
+test
