@@ -1,0 +1,111 @@
+@import '_variables';
+
+.top-menu {
+    position: fixed;
+    top: 0;
+    left: 25%;
+    width: 50%;
+    height: 40px;
+    background-color: #F7F3F6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 1;
+
+    @media screen and (max-width: 991px) {
+        width: 95%;
+        left: 0;
+    }
+
+    p,a {
+        margin: 0;
+        color: $secondary-color;
+        font-size: medium;
+
+        -webkit-user-select: none;
+        /* Safari */
+        -moz-user-select: none;
+        /* Firefox */
+        -ms-user-select: none;
+        /* Internet Explorer/Edge */
+        user-select: none;
+        /* Generic */
+    }
+
+    a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+}
+
+.bottom-menu {
+    position: fixed;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    height: 66px;
+    background-color: white;
+    z-index: 1;
+
+    @media screen and (max-width: 991px) {
+        width: 100%;
+        left: 0;
+    }
+
+    &.keyboard-open {
+        position: initial;
+    }
+
+    ul {
+        list-style-type: none;
+        display: flex;
+        justify-content: space-around;
+        align-items: stretch;
+        margin: 0;
+        padding: 0;
+        border-top: 1px solid $secondary-color;
+
+        li {
+            flex: 1;
+
+            &.active {
+                background-color: $primary-color;
+
+                a{
+                    color: white;
+
+                    img {
+                        filter: invert(100%);
+                    }
+                }
+            }
+
+            a {
+                text-decoration: none;
+                color: $secondary-color;
+                font-size: small;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 15px;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.container {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 66px;
+
+    &.keyboard-open {
+        padding-bottom: 10px;
+    }
+
+    @media screen and (max-width: 991px) {
+        width: 90%;
+    }
+}

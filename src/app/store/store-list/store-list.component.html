@@ -1,0 +1,47 @@
+<div class="header">
+  <app-header title="Stores"></app-header>
+  <div class="menu">
+    <app-button (click)="newStore()" [buttonHover]="hoverChoices.invert">
+      <img src="../../../assets/icons/icons8-plus-24.png" alt="add-icon" width="20" />
+    </app-button>
+  </div>
+</div>
+<ul>
+  <ng-container *ngrxLet="stores$ as stores">
+    @for (store of stores; track store.id) {
+    <li class="tile" @tileFadeSlideOut (click)="selectStore(store)">
+      @if(store.showDelete) {
+      <div class="delete-tile" @deleteFadeSlideInOut>
+        <div class="delete" (click)="delete($event, store.id)">
+          <img src="../../../assets/icons/icons8-delete-96.png" alt="delete-icon" width="40" height="40" />
+        </div>
+        <div class="cancel" (click)="cancelDelete($event, store)">
+          <img src="../../../assets/icons/icons8-cancel-96.png" alt="cancel-icon" width="30" height="30" />
+        </div>
+      </div>
+      }
+      <div class="title">
+        <div></div>
+        <label>{{ displayCreatedAt(store.createdAt) }}</label>
+      </div>
+      <div class="content">
+        <div class="begin">
+          {{ store.name }}
+        </div>
+        <div class="buttons">
+          <app-button (click)="editStore($event, store)"
+            ><img
+              src="../../../assets/icons/icons8-edit-24.png"
+              alt="edit-icon"
+              width="20"
+            />
+          </app-button>
+          <app-button [buttonStyle]="buttonStyles.danger" (click)="showDelete($event, store)"><img
+              src="../../../assets/icons/icons8-delete-24.png" alt="delete-icon" width="20" />
+          </app-button>
+        </div>
+      </div>
+    </li>
+    }
+  </ng-container>
+</ul>

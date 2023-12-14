@@ -1,0 +1,47 @@
+@import '_variables';
+@import '_mixins';
+
+.tile-add-container {
+    @include tile;
+
+    .form {
+        width: 100%;
+
+        .line1 {
+            display: flex;
+    
+            .group {
+                @include flex-column;
+
+                &.full-width {
+                    width: 100%;
+                }
+    
+                ::ng-deep {
+                    #input-amount {
+                        width: 20px;
+                        margin-right: 5px;
+                    }
+                }
+    
+                span {
+                    align-self: flex-start;
+                    color: $danger-color;
+                    font-size: small;
+                    margin-top: 5px;
+                }
+            }
+        }
+    
+        .line2 {
+            display: flex;
+            margin-top: 10px;
+    
+            div {
+                width: 30px;
+                margin-left: 5px;
+                @include flex-center;
+            }
+        }
+    }
+}

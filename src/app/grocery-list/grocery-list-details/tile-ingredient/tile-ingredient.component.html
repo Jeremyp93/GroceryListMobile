@@ -1,0 +1,23 @@
+@if(ingredient) {
+<div [ngClass]="ingredient.selected ? 'tile-container done' : 'tile-container'">
+  <div class="radio-button">
+    {{ ingredient.amount }}
+  </div>
+  <div class="text">
+    {{ ingredient.name }}
+    <span>{{ ingredient.category }}</span>
+  </div>
+  <div>
+    <app-button
+      [buttonStyle]="buttonStyles.danger"
+      (click)="showDeleteList($event)"
+      [buttonHover]="hoverChoices.invert"
+      ><img
+        src="../../../assets/icons/icons8-delete-24.png"
+        alt="delete-icon"
+        width="20"
+      />
+    </app-button>
+  </div>
+</div>
+}

@@ -1,0 +1,230 @@
+@import '_mixins';
+@import '_variables';
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-modal,
+.form {
+    @include flex-column;
+
+    .content {
+        @include flex-column;
+        align-items: center;
+
+        .group {
+            @include flex-column;
+            align-items: flex-start;
+            width: 100%;
+
+            span {
+                color: $danger-color;
+                font-size: small;
+                margin-top: 5px;
+            }
+        
+            label {
+                font-size: large;
+                font-weight: bold;
+                color: $secondary-color;
+            }
+        
+            &:not(:first-child).with-label {
+                margin-top: 40px;
+            }
+
+            &:not(.with-label):not(:first-child) {
+                margin-top: 20px;
+            }
+        }
+    }
+    .submit {
+        display: flex;
+        align-self: center;
+    
+        &.top {
+            margin-bottom: 10px;
+        }
+    
+        &.bottom {
+            margin-top: 10px;
+        }
+    }
+}
+
+.form {
+    .content {
+        background-color: white;
+        padding: 20px 10px;
+        box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, .1);
+    }
+}
+
+.form-modal {
+    .content {
+        padding: 0 10px 20px 10px;
+    }
+
+    .submit.bottom {
+        margin-bottom: 10px;
+    }
+}
+
+.delete-tile {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: $danger-color;
+    cursor: pointer;
+
+    .delete {
+        @include flex-center;
+        flex: 1;
+        img {
+            animation: wiggle 2s linear infinite;
+        }
+    }
+
+    .cancel {
+        @include flex-center;
+        width: 20%;
+        background-color: #B3B6B7;
+    }
+
+    @keyframes wiggle {
+
+        0%,
+        7% {
+            transform: rotateZ(0);
+        }
+
+        15% {
+            transform: rotateZ(-15deg);
+        }
+
+        20% {
+            transform: rotateZ(10deg);
+        }
+
+        25% {
+            transform: rotateZ(-10deg);
+        }
+
+        30% {
+            transform: rotateZ(6deg);
+        }
+
+        35% {
+            transform: rotateZ(-4deg);
+        }
+
+        40%,
+        100% {
+            transform: rotateZ(0);
+        }
+    }
+}
+
+.tile {
+    list-style: none;
+    background-color: white;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 1px 1px 10px 0 rgba(0, 0, 0, .1);
+    transition: all .2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: relative;
+
+    @keyframes fadeOut {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(100%);
+        }
+    }
+    
+    &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .title {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        cursor: pointer;
+        color: $primary-color;
+        font-weight: 500;
+    }
+
+    .content {
+        display: flex;
+        justify-content: space-between;
+
+        @media screen and (max-width: 991px) {
+            flex-direction: column;
+        }
+
+        .begin {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            flex: 1;
+            cursor: pointer;
+            color: $secondary-color;
+            font-size: medium;
+            font-weight: bold;
+
+            @media screen and (max-width: 991px) {
+                justify-content: center;
+                padding: 10px;
+                font-weight: bolder;
+                font-size: large;
+            }
+        }
+    
+        .buttons {
+            padding: 10px;
+            @include flex-center;
+
+            @media screen and (max-width: 991px) {
+                cursor: pointer;
+            }
+    
+            button {
+                height: 100%;
+            }
+    
+            &>* {
+                margin-right: 10px;
+            }
+    
+            &>*:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.number-naked {
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
+    -moz-appearance: textfield;
+
+}
+
+app-input-field {
+    width: 100%;
+}

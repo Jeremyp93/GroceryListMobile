@@ -1,0 +1,11 @@
+.content {
+    flex-direction: row;
+
+    .group {
+        margin-bottom: 0;
+
+        input {
+            width: calc(100% - 30px);
+        }
+    }
+}

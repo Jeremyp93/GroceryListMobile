@@ -1,0 +1,132 @@
+<app-modal
+  [isOpen]="modalOpen"
+  (closeModalEvent)="modalOpen = false"
+  ><div>
+    <h4>Create a copy</h4>
+    <form
+      class="form-modal"
+      [formGroup]="duplicateForm"
+      (ngSubmit)="onSubmitDuplicateForm()"
+    >
+      <div class="content">
+        <div class="group">
+          <app-input-field [type]="inputTypes.text" placeHolder="Name" id="name" formControlName="name"></app-input-field>
+          @if(this.duplicateForm.controls["name"].invalid &&
+          duplicateFormSubmitted) {
+          <span class="error">Name is required</span>
+          }
+        </div>
+      </div>
+      <div class="submit bottom">
+        <app-button
+          type="submit"
+          [loading]="isLoading"
+          [buttonHover]="hoverChoices.invert"
+          ><img
+            src="../../../../assets/icons/icons8-check-24.png"
+            alt="submit-icon"
+            width="20"
+        /></app-button>
+      </div>
+    </form>
+  </div>
+</app-modal>
+<div class="header">
+  <app-header title="Grocery Lists"></app-header>
+  <div class="menu">
+    <app-button (click)="newList()" [buttonHover]="hoverChoices.invert">
+      <img
+        src="../../../assets/icons/icons8-plus-24.png"
+        alt="add-icon"
+        width="20"
+      />
+    </app-button>
+  </div>
+</div>
+<ul>
+  <ng-container *ngrxLet="groceryLists$ as groceryLists">
+    @for (groceryList of groceryLists; track groceryList.id) {
+    <li class="tile" (click)="selectList(groceryList)" @tileFadeSlideOut>
+      @if(groceryList.showDelete) {
+      <div class="delete-tile" @deleteFadeSlideInOut>
+        <div class="delete" (click)="deleteList($event, groceryList.id)">
+          <img
+            src="../../../assets/icons/icons8-delete-96.png"
+            alt="delete-icon"
+            width="40"
+            height="40"
+          />
+        </div>
+        <div class="cancel" (click)="cancelDeleteList($event, groceryList)">
+          <img
+            src="../../../assets/icons/icons8-cancel-96.png"
+            alt="cancel-icon"
+            width="30"
+            height="30"
+          />
+        </div>
+      </div>
+      }
+      <div class="title">
+        @if (groceryList.store) {
+        <label>{{ groceryList.store.name }}</label>
+        } @else {
+        <div></div>
+        }
+        <label>{{ displayCreatedAt(groceryList.createdAt) }}</label>
+      </div>
+      <div class="content">
+        <div class="begin">
+          {{ groceryList.name }}
+        </div>
+        <div class="buttons">
+          @if(groceryList.store) {
+          <app-anchor-button
+            [href]="(groceryList.store | linkMapsStore) || '#'"
+            [newWindow]="true"
+            (click)="preventPropagation($event)"
+            ><img
+              src="../../../assets/icons/icons8-location-24.png"
+              alt="location-icon"
+              width="20"
+          /></app-anchor-button>
+          }
+          <app-button (click)="editList($event, groceryList)"
+            ><img
+              src="../../../assets/icons/icons8-edit-24.png"
+              alt="edit-icon"
+              width="20"
+            />
+          </app-button>
+          <app-button (click)="openModal($event, groceryList)"
+            ><img
+              src="../../../assets/icons/icons8-duplicate-24.png"
+              alt="duplicate-icon"
+              width="20"
+            />
+          </app-button>
+          <app-button
+            [buttonStyle]="buttonStyles.danger"
+            (click)="showDeleteList($event, groceryList)"
+            ><img
+              src="../../../assets/icons/icons8-delete-24.png"
+              alt="delete-icon"
+              width="20"
+            />
+          </app-button>
+        </div>
+      </div>
+    </li>
+    } @empty { @if(isLoading){
+    <div class="flex-center mt-20">
+      <app-loading
+        [size]="loadingSizes.large"
+        [color]="loadingColors.app"
+      ></app-loading>
+    </div>
+
+    } @else {
+    <p>No grocery list yet</p>
+    } }
+  </ng-container>
+</ul>

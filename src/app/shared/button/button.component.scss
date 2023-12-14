@@ -1,0 +1,40 @@
+@import '_variables';
+@import '_mixins';
+
+button {
+    @include flex-center;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    background-color: $primary-color;
+    color: #fff;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    transition: transform 0.3s ease;
+    border: none;
+    cursor: pointer;
+
+    &.danger {
+        background-color: $danger-color;
+    }
+
+    &.success {
+        background-color: $success-color;
+    }
+
+    &.hover-invert {
+        ::ng-deep {
+            img {
+                filter: invert(1);
+            }
+        }
+    }
+
+    &.hover-up {
+        transform: translateY(-3px);
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+}

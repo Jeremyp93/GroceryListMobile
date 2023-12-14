@@ -1,0 +1,27 @@
+@import '_variables';
+
+.alert {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 25%;
+    width: 50%;
+    z-index: 1200;
+    padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    background-color: $danger-color;
+
+    @media screen and (max-width: 991px) {
+        left: 0;
+        width: 100%;
+    }
+
+    .message {
+        color: white;
+        text-align: initial;
+        font-size: small;
+    }
+}

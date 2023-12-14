@@ -1,0 +1,130 @@
+<app-header [title]="title" [backButton]="true"></app-header>
+@if (groceryListForm) {
+<form
+  [formGroup]="groceryListForm"
+  (ngSubmit)="onSubmit()"
+  autocomplete="off"
+  class="form"
+>
+  <div class="submit top">
+    <app-button
+      type="submit"
+      class="button-submit"
+      [loading]="isLoading"
+      [buttonHover]="hoverChoices.invert"
+      ><img
+        src="../../../../assets/icons/icons8-check-24.png"
+        alt="submit-icon"
+        width="20"
+    /></app-button>
+  </div>
+  <div class="content">
+    <div class="group with-label first">
+      <app-input-field [type]="inputTypes.text" label="Name of the list" id="name" formControlName="name"></app-input-field>
+      @if(this.groceryListForm.controls["name"].invalid && submitted) {
+      <span class="error">Name is required</span>
+      }
+    </div>
+    <div class="group">
+      <label for="store">Store</label>
+      <select
+        name="store"
+        id="store"
+        formControlName="storeId"
+        (change)="onChangeStore($event)"
+      >
+        <option value="" selected>No store</option>
+        @for (store of stores$ | async; track $index) {
+        <option [value]="store.id">{{ store.name }}</option>
+        }
+      </select>
+    </div>
+    <div class="group" formArrayName="ingredients">
+      <div class="ingredient-title">
+        <label>Items</label>
+        <app-button
+          type="button"
+          (click)="onAddIngredient()"
+          [buttonHover]="hoverChoices.invert"
+          ><img
+            src="../../../../assets/icons/icons8-plus-24.png"
+            alt="add-icon"
+            width="20"
+        /></app-button>
+      </div>
+      @if(ingredientControls.length === 0) {
+      <p>No items added yet.</p>
+      } @else { @for (ingredientControl of ingredientControls; track
+      ingredientControl.value.id) {
+      <div class="ingredient-section" [formGroupName]="$index">
+        <div class="ingredient-amount">
+          <app-input-field [type]="inputTypes.number" placeHolder="1" [id]="'amount_' + ingredientControl.value.id" formControlName="amount" (keydown.enter)="onEnterPressed($event)"></app-input-field>
+          @if(ingredientControl.get("amount")?.invalid &&
+          ingredientControl.get("amount")?.touched) {
+          <span class="error">Amount is required</span>
+          }
+        </div>
+        <div class="ingredient-name">
+          <app-input-field #inputFields [type]="inputTypes.text" placeHolder="Name of ingredient" [id]="'name_' + ingredientControl.value.id" formControlName="name" (keydown.enter)="onEnterPressed($event)"></app-input-field>
+          <!-- <input
+            #inputFields
+            [id]="'name_' + ingredientControl.value.id"
+            type="text"
+            formControlName="name"
+            placeholder="Name of ingredient"
+            (keydown.enter)="onEnterPressed($event)"
+          /> -->
+          @if(ingredientControl.get("name")?.invalid && submitted) {
+          <span class="error">Name is required</span>
+          }
+        </div>
+        <div class="ingredient-category">
+          <select
+            name="category"
+            id="category"
+            formControlName="category"
+            (keydown.enter)="onEnterPressed($event)"
+          >
+            <option value="" selected>No category</option>
+            @for (category of categories; track $index) {
+            <option [value]="category">{{ category }}</option>
+            }
+          </select>
+        </div>
+        <div class="ingredient-delete">
+          <app-button
+            [buttonStyle]="buttonStyles.danger"
+            (click)="onDeleteIngredient(ingredientControl.value.id)"
+            [buttonHover]="hoverChoices.invert"
+            ><img
+              src="../../../assets/icons/icons8-delete-24.png"
+              alt="delete-icon"
+              width="20"
+            />
+          </app-button>
+        </div>
+      </div>
+      <hr />
+      } }
+    </div>
+  </div>
+  <div class="submit bottom">
+    <app-button
+      type="submit"
+      [loading]="isLoading"
+      [buttonHover]="hoverChoices.invert"
+      ><img
+        src="../../../../assets/icons/icons8-check-24.png"
+        alt="submit-icon"
+        width="20"
+    /></app-button>
+  </div>
+</form>
+} @else {
+<div class="flex-center mt-20">
+  <app-loading
+    [size]="loadingSizes.large"
+    [color]="loadingColors.app"
+  ></app-loading>
+</div>
+}

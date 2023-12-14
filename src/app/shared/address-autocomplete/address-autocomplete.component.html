@@ -1,0 +1,13 @@
+<div class="address-wrapper">
+    <label>Address</label>
+    <div class="input-wrapper">
+        <input type="text" placeholder="Search" (input)="onInputChange($event)" (focus)="onFocus($event)" [(ngModel)]="searchText">
+        <span *ngIf="searchText" class="clear-icon" (click)="clearInput()">X</span>
+    </div>
+    <ul>
+        <li *ngFor="let address of filteredAddresses" (click)="selectAddress(address)">
+            {{ address.formatted }}
+        </li>
+    </ul>
+</div>
+

@@ -1,0 +1,42 @@
+<div class="header">
+  <app-header title="Sections" [backButton]="true"></app-header>
+  <h3>{{ title }}</h3>
+  <div class="menu">
+    <app-button (click)="newSection()">
+      <img src="../../../assets/icons/icons8-plus-24.png" alt="add-icon" width="20" />
+    </app-button>
+    <app-button (click)="saveSections()" [buttonStyle]="saved ? buttonStyles.success : buttonStyles.normal"
+      [disabled]="saved" [loading]="saveProcess">
+      @if (saved) {
+      <img src="../../../../assets/icons/icons8-check-24.png" alt="submit-icon" width="20" />
+      } @else {
+      <img src="../../../assets/icons/icons8-save-24.png" alt="save-icon" width="20" />
+      }
+    </app-button>
+    <app-button (click)="editStore()">
+      <img src="../../../assets/icons/icons8-edit-24.png" alt="edit-icon" width="20" />
+    </app-button>
+  </div>
+</div>
+@if (isLoading) {
+<div class="flex-center mt-20">
+  <app-loading [color]="loadingColors.app" [size]="loadingSizes.large"></app-loading>
+</div>
+}
+<div cdkDropListGroup>
+  <ng-container *ngrxLet="sections$ as sections">
+    <ul cdkDropList cdkDropListLockAxis="y" [cdkDropListData]="sections" (cdkDropListDropped)="drop($event)">
+      <ng-template #dynamicComponentContainer></ng-template>
+      @for(section of sections; track section.id) {
+      <li cdkDrag class="tile-container" @tileFadeSlideOut [@.disabled]="saveProcess">
+        <div cdkDragHandle class="drag"><img src="../../../assets/icons/icons8-drag-reorder-24.png" alt="drag-icon" width="20" /></div>
+        {{section.name}}
+        <app-button [buttonStyle]="buttonStyles.danger" (click)="deleteSection(section.id!)"
+          [buttonHover]="hoverChoices.invert"><img src="../../../assets/icons/icons8-delete-24.png" alt="delete-icon"
+            width="20" />
+        </app-button>
+      </li>
+      }
+    </ul>
+  </ng-container>
+</div>

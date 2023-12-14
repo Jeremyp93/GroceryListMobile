@@ -1,0 +1,15 @@
+<div class="tile-add-container">
+  <form [formGroup]="addForm" class="form">
+    <div class="content">
+      <div class="group">
+        <app-input-field #inputField [type]="inputTypes.text" placeHolder="Name" id="name" formControlName="name" (keydown.enter)="onEnterPressed()"></app-input-field>
+        @if(addForm.get("name")?.invalid && formSubmitted) {
+        <span class="error">Name is required</span>
+        }
+      </div>
+      <app-button (click)="addItem()" [buttonHover]="hoverChoices.invert"><img
+          src="../../../../assets/icons/icons8-check-24.png" alt="add-icon" width="20" />
+      </app-button>
+    </div>
+  </form>
+</div>

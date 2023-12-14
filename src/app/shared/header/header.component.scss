@@ -1,0 +1,23 @@
+@import '_variables';
+
+.header {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+
+    .button {
+        position: absolute;
+        left: 0;
+        top: 4px;
+    }
+
+    h1 {
+        color: $secondary-color;
+        word-wrap: break-word;
+
+        &.with-button {
+            margin-left: 35px;
+            margin-right: 35px;
+        }
+    }
+}

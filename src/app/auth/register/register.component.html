@@ -1,0 +1,65 @@
+<p>register works!</p>
+<div class="background">
+  <div class="login">
+    <app-header title="Sign Up"></app-header>
+    <form
+      [formGroup]="signupForm"
+      (ngSubmit)="onSubmit()"
+      autocomplete="off"
+      class="form"
+    >
+      <div class="content">
+        <div class="group with-label">
+          <app-input-field [type]="inputTypes.text" label="First Name" id="firstname" [formControlName]="signupFormFirstName"></app-input-field>
+          @if(this.signupForm.controls[signupFormFirstName].invalid &&
+          isSubmitted) {
+          <span class="error">Please enter your first name</span>
+          }
+        </div>
+        <div class="group with-label">
+          <app-input-field [type]="inputTypes.text" label="Last Name" id="lastname" [formControlName]="signupFormLastName"></app-input-field>
+          @if(this.signupForm.controls[signupFormLastName].invalid &&
+          isSubmitted) {
+          <span class="error">Please enter your last name</span>
+          }
+        </div>
+        <div class="group with-label">
+          <app-input-field [type]="inputTypes.email" label="Email" id="email" [formControlName]="signupFormEmail"></app-input-field>
+          @if(this.signupForm.controls[signupFormEmail].invalid && isSubmitted)
+          {
+          <span class="error">Please enter a valid email</span>
+          }
+        </div>
+        <div class="group with-label">
+          <app-input-field [type]="inputTypes.password" label="Password" id="password" [formControlName]="signupFormPassword"></app-input-field>
+          @if(this.signupForm.controls[signupFormPassword].invalid &&
+          isSubmitted) {
+          <span class="error"
+            >Password is required and must be at least 6 charachters long</span
+          >
+          }
+        </div>
+        <div class="group with-label">
+          <app-input-field [type]="inputTypes.password" label="Confirm Password" id="confirmPassword" [formControlName]="signupFormConfirmPassword"></app-input-field>
+          @if(this.signupForm.controls[signupFormConfirmPassword].invalid &&
+          isSubmitted) {
+          <span class="error">Passwords must be the same</span>
+          }
+        </div>
+      </div>
+
+      <div class="submit bottom">
+        <app-button type="submit" [loading]="isLoading"
+          ><img
+            src="../../../../assets/icons/icons8-check-24.png"
+            alt="submit-icon"
+            width="20"
+        /></app-button>
+      </div>
+    </form>
+    <p>
+      Already have an account ?
+      <a [routerLink]="loginRoute">Login now !</a>
+    </p>
+  </div>
+</div>

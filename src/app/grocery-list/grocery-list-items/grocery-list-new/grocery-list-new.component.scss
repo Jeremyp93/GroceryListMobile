@@ -1,0 +1,73 @@
+@import '_variables';
+@import '_mixins';
+
+.ingredient-title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+hr {
+    display: none;
+
+    &:not(:last-child) {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 0;
+        color: $secondary-color;
+    }
+}
+
+.ingredient-section {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 40px minmax(auto, 1fr) 30px;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    margin-top: 10px;
+
+    .ingredient-amount {
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            //Firefox
+        }
+    }
+
+    .ingredient-name {
+        grid-column: 2 / span 2;
+        grid-row: 1 / span 1;
+
+        @include flex-column;
+
+        span {
+            align-self: flex-start;
+        }
+    }
+
+    .ingredient-category {
+        grid-column: 1 / span 2;
+        grid-row: 2 / span 1;
+    }
+
+    .ingredient-delete {
+        grid-column: 3 / span 1;
+        grid-row: 2 / span 1;
+
+        @include flex-center;
+    }
+}
+
+.first {
+    margin-top: 20px;
+}

@@ -1,0 +1,50 @@
+@import '_variables';
+
+.section-title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-container {
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+
+    .name {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .delete {
+        width: 30px;
+    }
+}
+
+.section-errors {
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+}
+
+hr {
+    display: none;
+
+    &:not(:last-child) {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 0;
+        color: $secondary-color;
+    }
+}
+
+app-address-autocomplete {
+    width: 100%;
+}
+
+.first {
+    margin-top: 20px;
+}
